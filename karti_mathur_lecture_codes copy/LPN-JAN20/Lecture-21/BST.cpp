@@ -211,6 +211,68 @@ void Print(node* head){
 	cout<<"NULL"<<endl;
 }
 
+bool search(node* root,int data){
+    if(root == NULL){
+        return false;
+    }
+    if(root->data == data){
+        return true;
+    }
+    if(data < root->data){
+       return search(root->left,data);
+   }
+   else{
+      return search(root->right,data);
+   }
+//    return false;
+
+}
+
+node* deleteNode(node* root,int data){
+    if(root == NULL){
+        return NULL;
+    }
+    if(data < root->data){
+        root->left = deleteNode(root->left,data);
+        return root;
+    }
+    else if(data == root->data){
+        // case 1 
+        if(root->right == NULL && root->left== NULL){
+            delete root;
+            return NULL;
+        }
+        // case 2 
+        if(root->right!=NULL && root->left == NULL){
+            node* temp = root->right;
+            delete root;
+            return temp;
+        }
+        if(root->left!=NULL && root->right == NULL){
+            node* temp = root->left;
+            delete root;
+            return temp;
+        }
+        /// case 3;
+         if(root->left!=NULL && root->right!= NULL){
+            node* replace = root->right;
+            while(replace->left!=NULL){
+                replace = replace->left;
+            }
+            root->data = replace->data;
+            root->right = deleteNode(root->right,data);
+            return root;
+
+
+        }
+    }
+     else{
+             root->right = deleteNode(root->right,data);
+            return root;
+        }
+        return root;
+}
+
 int main(){
 	// int arr[]={1,3,4,5,8,9};
 	// int n =sizeof(arr)/sizeof(int);
