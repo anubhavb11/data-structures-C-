@@ -1,0 +1,93 @@
+use sql_store;
+
+-- select * 
+-- from customers 
+-- where customer_id > 1
+-- order by first_name
+
+-- select 
+-- 	first_name, 
+--     last_name , 
+--     points,
+--     (points+10) *10 as discount_factor
+-- from customers
+
+-- select name, unit_price, unit_price*1.1 as new_price from products  
+
+-- select * from orders where order_date > '2018-12-31' 
+
+-- select * from  order_items where order_id = 6 AND unit_price*quantity > 30
+
+-- select * from customers where birth_date between '1990-1-1' and'2000-1-1';
+
+-- select * from customers where address LIKE  '%avenue%' OR address like '%trail%'
+
+-- select * from customers where phone LIKE '%9'
+
+-- select * from orders where shipped_date is not  NULL
+
+-- select * from order_items where order_id = 2 order by quantity*unit_price DESC
+
+-- select * from customers ORDER BY points LIMIT 3
+
+
+-- JOINS 
+-- select * from products p join order_items o on o.product_id = p.product_id
+
+-- use sql_hr;
+-- SELECT e.employee_id, e.first_name , m.first_name as manager  FROM employees e 
+-- join employees m 
+-- 	on e.reports_to = m.employee_id
+
+-- multiple table join 
+	-- select order_id, c.first_name,  name from orders o 
+	-- join order_statuses os
+	-- 	on o.status = os.order_status_id
+	-- join customers c
+	-- 	on o.customer_id = c.customer_id
+	-- order by first_name
+
+-- use sql_invoicing;
+
+-- select p.payment_id, p.amount, c.name, c.city, pm.name from payments p 
+-- 	join clients c 
+-- 		on p.client_id = c.client_id
+--     join payment_methods pm 
+-- 		on p.payment_method = pm.payment_method_id
+
+-- OUTER JOIN 
+-- select p.product_id, name,oi.quantity from products p 
+-- left join order_items oi 
+-- on oi.product_id = p.product_id
+
+-- select o.order_date, o.order_id, c.first_name,sh.name,os.name from orders o 
+-- join customers c
+-- 	on c.customer_id = o.customer_id
+-- join order_statuses os
+-- 	on o.status = os.order_status_id
+-- left join shippers sh
+-- 	on o.shipper_id = sh.shipper_id
+
+-- USING 
+
+	-- use sql_invoicing;
+
+		-- 	select p.date, c.name, p.amount, pm.name from payments p
+		-- 	join clients c 
+		-- 	using (client_id)
+		-- 	join payment_methods pm
+		-- 	on  p.payment_method  = pm.payment_method_id
+
+
+-- UNIONS
+-- select customer_id, first_name, points, 'Bronze' as type from customers  where points < 500
+-- union
+-- select customer_id, first_name, points, 'Silver' as type from customers  where points < 2500 
+
+
+-- INSERT 
+insert into products (name,quantity_in_stock,unit_price)
+values ('abc',10,10.0)
+ 
+	
+https://www.youtube.com/watch?v=7S_tz1z_5bA&t=10179s&ab_channel=ProgrammingwithMosh
