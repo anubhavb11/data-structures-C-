@@ -69,3 +69,78 @@ public:
         
     }
 };
+
+// k lasrgest element using heap 
+
+class heap{
+    vector<int> v;
+    
+    void heapify(int i){
+        int max = i;
+        int l = 2*i;
+        int r = 2*i +1;
+        if(l<v.size() && v[max]<v[l]){
+            max = l;
+        }
+        if(r<v.size() && v[max]<v[r]){
+            max = r;
+        }
+        if(max!=i){
+        swap(v[max],v[i]);
+        heapify(max);
+        }
+        
+    }
+    
+    public:
+    heap(){
+        v.push_back(-1);
+    }
+    
+    void push(int data){
+        v.push_back(data);
+        int c = v.size()-1;
+        int p = c/2;
+        while(c>1){
+            if(v[p]<v[c]){
+                swap(v[p],v[c]);
+                c = p;
+                p = p/2;
+            }
+            else{
+                break;
+            }
+        }
+    }
+    
+    void pop(){
+        swap(v[1],v[v.size()-1]);
+        v.pop_back();
+        heapify(1);
+    }
+    
+    int top(){
+        return v[1];
+    }
+    
+};
+
+
+class Solution{
+public:	
+	vector<int> kLargest(int arr[], int n, int k) {
+	    // code here
+	    heap q;
+	    for(int i=0;i<n;i++){
+	        q.push(arr[i]);
+	    }
+	    vector<int> a;
+	    for(int i=0;i<k;i++){
+	        a.push_back(q.top());
+	        q.pop();
+	        
+	    }
+	    return a;
+	}
+
+};
